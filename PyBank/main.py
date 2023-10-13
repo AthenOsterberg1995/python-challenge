@@ -5,7 +5,6 @@ def main():
     #find csv file path
     #code for finding file path from class 3.2 activity Stu_ReadComicBooksCSV
     csvpath = os.path.join("..","PyBank" ,"Resources", "budget_data.csv")
-    print(csvpath)
     #Create list to store dates and profit/losses
     date_list = []
     profit_loss_list = []
@@ -27,11 +26,16 @@ def main():
     #Get the monthly change in profit/loss for average, greatest increase and greatest decrease
     change_list = GetMonthlyChangeList(profit_loss_list)
 
+    #Find how many months are in the sheet
     total_months = GetMonths(date_list)
+    #Find the total profit
     total_profit = GetTotalProfit(profit_loss_list)
+    #Find the average change between months
     average_change = GetAverageChange(change_list)
+    #Find the greatest increase and decrease in profits between months
     greatest_increase = GetGreatestIncrease(date_list, change_list)
     greatest_decrease = GetGreatestDecrease(date_list, change_list)
+    #print analysis in terminal and write it to csv
     WriteAndPrintAnalysis(total_months,total_profit,average_change,greatest_increase,greatest_decrease)
 
 def GetMonths(date_values):
