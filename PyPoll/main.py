@@ -25,6 +25,7 @@ def main():
             #https://www.geeksforgeeks.org/check-if-element-exists-in-list-in-python/
             #if the candidate in the current is not in the candidate list, add them to the list and
             #add a vote for them in the vote count
+            #This ensures candidate name and vote count share the same index in their respective lists
             if str(row[2]) not in candidate_list:
                 candidate_list.append(str(row[2]))
                 vote_count_list.append(1)
@@ -43,15 +44,18 @@ def main():
     
 
 def GetTotalVotes(candidate_vote_count):
-    #add all the votes for each candidate
+    #loop through vote count list and add all the values for total votes
     total = 0
     for vote_count in candidate_vote_count:
         total += int(vote_count)
     return total
 
 def GetPercentVotes(candidate_vote_count, total_vote_count):
-    #find the percentage of the vote each candidate had and return a list of those percentages
+    #find the percentage of the vote each candidate had and return a list of those percentages 
+    #with same index as the candidate and count
     percent_list = []
+    #loop through each value in the vote count list and divide by total votes for percentage and return
+    #a list with the percents at the same index as candidate name and vote count
     for vote_count in candidate_vote_count:
         percent_list.append(round(int(vote_count)/total_vote_count*100,3))
     return percent_list
@@ -60,6 +64,8 @@ def GetWinner(candidate_vote_count):
     #find the list index of the winner
     winner_index = 0
     winner_value = 0
+    #loop through vote count list, if the current value is greater than what's stored in winner_value,
+    #set a new winner value and the new index equal to whatever index the loop is at
     for vote_count in range(0,len(candidate_vote_count)):
         if int(candidate_vote_count[vote_count]) > winner_value:
             winner_index = vote_count

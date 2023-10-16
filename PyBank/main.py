@@ -8,7 +8,6 @@ def main():
     #Create list to store dates and profit/losses
     date_list = []
     profit_loss_list = []
-    change_list = []
     
     #read csv
     #code for reading csv from class 3.2 activity Stu_ReadComicBooksCSV
@@ -86,12 +85,14 @@ def GetGreatestDecrease(date_values, change_values):
         if int(change_values[value]) <= greatest_value_decrease:
             greatest_value_decrease = int(change_values[value])
             #change starts at the 2nd month in the profit/loss list so so we add 1 to
-            #the date index to find the correct date
+            #the date index to find the correct date index
             date_of_greatest_decrease = str(date_values[value+1])
     #return a list to have access to the date and value of greatest increase
     return [date_of_greatest_decrease, greatest_value_decrease]
 
 def GetMonthlyChangeList(profit_values):
+    #subtract value of previous month from current month for every month except the first
+    #and return as a list
     change_list = []
     for value in range(1, len(profit_values)):
         change_list.append(int(profit_values[value])-int(profit_values[value-1]))
@@ -101,10 +102,11 @@ def WriteAndPrintAnalysis(months,total,average,increase,decrease):
     #create list of values for output to terminal and txt file
     output_list = ["Financial Analysis",
                    "----------------------------",
-                   f"Total Months: {str(months)}",
-                   f"Total: {str(total)}", f"Average Change: {str(average)}", 
-                   f"Greatest Increase in Profits: {str(increase[0])} (${str(increase[1])})",
-                   f"Greatest Decrease in Profits: {str(decrease[0])} (${str(decrease[1])})"]
+                   f"Total Months: {months}",
+                   f"Total: ${total}", 
+                   f"Average Change: ${average}", 
+                   f"Greatest Increase in Profits: {increase[0]} (${increase[1]})",
+                   f"Greatest Decrease in Profits: {decrease[0]} (${decrease[1]})"]
     #print statements to match output in example
     for line in output_list:
         print(str(line))
